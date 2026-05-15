@@ -50,42 +50,53 @@ export const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className={`sticky top-0 z-50 border-b border-transparent transition-all duration-300 ${
-          isScrolled ? "bg-[var(--nav-bg)] shadow-soft backdrop-blur-xl" : "bg-transparent"
-        }`}
+        className="fixed inset-x-0 top-4 z-50 px-3 sm:px-6"
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a
-            href="#home"
-            className="font-display text-lg font-extrabold tracking-tight text-textPrimary"
-          >
-            {portfolioData.name}
-          </a>
-
-          <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-textSecondary transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <button
-              type="button"
-              onClick={() => setIsOpen((current) => !current)}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-bgSecondary text-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
+        <motion.div
+          animate={{
+            y: isScrolled ? -2 : 0,
+            rotate: isScrolled ? -0.35 : 0,
+          }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className={`mx-auto max-w-6xl rounded-[1.75rem] border px-4 py-3 shadow-soft transition-all duration-300 sm:px-6 ${
+            isScrolled
+              ? "border-border bg-[var(--nav-bg)] shadow-glow backdrop-blur-2xl"
+              : "border-border bg-[var(--nav-bg)] backdrop-blur-xl"
+          }`}
+        >
+          <div className="grid grid-cols-[1fr_auto] items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
+            <a
+              href="#home"
+              className="justify-self-start font-display text-lg font-extrabold tracking-tight text-textPrimary"
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+              {portfolioData.name}
+            </a>
+
+            <nav className="hidden items-center justify-center gap-6 md:flex">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-textSecondary transition hover:-translate-y-0.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center justify-self-end gap-3">
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setIsOpen((current) => !current)}
+                aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-bgSecondary text-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
+              >
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         <AnimatePresence>
           {isOpen ? (
@@ -93,7 +104,7 @@ export const Navbar = () => {
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              className="border-t border-border bg-bgSecondary px-4 pb-4 md:hidden"
+              className="mx-auto mt-3 max-w-6xl rounded-[1.5rem] border border-border bg-[var(--nav-bg)] px-4 pb-4 backdrop-blur-2xl md:hidden"
             >
               <div className="flex flex-col gap-3 pt-4">
                 {navLinks.map((link) => (

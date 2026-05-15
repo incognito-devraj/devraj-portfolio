@@ -23,13 +23,19 @@ const itemVariants = {
   },
 };
 
+const nameParts = portfolioData.name.split(" ");
+const firstName = nameParts[0];
+const remainingName = nameParts.slice(1).join(" ");
+
 export const Hero = () => {
   return (
     <section
       id="home"
-      className="hero-grid relative flex min-h-screen items-center overflow-hidden bg-hero-radial"
+      className="hero-grid hero-surface relative flex min-h-screen items-center overflow-hidden pt-28"
     >
       <div className="pointer-events-none absolute right-[-8rem] top-[-6rem] h-72 w-72 rounded-full bg-accent opacity-20 blur-3xl" />
+      <div className="hero-orb pointer-events-none absolute left-[-5rem] top-1/3 h-64 w-64 rounded-full blur-3xl" />
+
       <div className="mx-auto flex w-full max-w-6xl justify-center px-4 py-24 sm:px-6 lg:px-8">
         <LazyMotion features={domAnimation}>
           <motion.div
@@ -38,9 +44,16 @@ export const Hero = () => {
             animate="visible"
             className="relative z-10 flex max-w-4xl flex-col items-center text-center"
           >
+            <motion.p
+              variants={itemVariants}
+              className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-accent opacity-80"
+            >
+              Java Backend | Cybersecurity | Recruiter Ready
+            </motion.p>
+
             <motion.div
               variants={itemVariants}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-200 shadow-glow"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-700 shadow-glow dark:text-emerald-200"
             >
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
               Available for TCS NQT &amp; Internships
@@ -48,9 +61,10 @@ export const Hero = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="font-display text-5xl font-extrabold leading-tight tracking-tight text-textPrimary sm:text-6xl lg:text-7xl"
+              className="font-display text-5xl font-extrabold leading-[0.92] tracking-tight text-textPrimary sm:text-6xl lg:text-7xl"
             >
-              {portfolioData.name}
+              <span className="hero-title-glow block">{firstName}</span>
+              <span className="hero-title-glow block">{remainingName}</span>
             </motion.h1>
 
             <motion.p
@@ -74,7 +88,7 @@ export const Hero = () => {
               <a
                 href="/Devraj_Resume.pdf"
                 download
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-slate-950 transition hover:bg-accentHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-slate-950 transition hover:-translate-y-1 hover:bg-accentHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <Download className="h-5 w-5" />
                 Download Resume
@@ -83,7 +97,7 @@ export const Hero = () => {
                 href={portfolioData.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-semibold text-textPrimary transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-bgSecondary px-6 py-3 font-semibold text-textPrimary shadow-soft transition hover:-translate-y-1 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <ExternalLink className="h-5 w-5" />
                 LinkedIn Profile
@@ -97,7 +111,7 @@ export const Hero = () => {
               {["SGPA 8.48", "67 WPM", "Zscaler Certified"].map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-border bg-bgSecondary px-4 py-2 text-sm font-medium text-textPrimary"
+                  className="rounded-full border border-border bg-bgSecondary px-4 py-2 text-sm font-medium text-textPrimary shadow-soft backdrop-blur-sm"
                 >
                   {item}
                 </span>
